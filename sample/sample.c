@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <lbfgs.h>
+#include "../include/lbfgs.h"
 
 static lbfgsfloatval_t evaluate(
     void *instance,
@@ -46,6 +46,16 @@ static int progress(
 
 int main(int argc, char *argv[])
 {
+  #ifdef __SSE2__
+    printf("SSE2 defined\n");
+  #else
+    printf("SSE2 NOT defined\n");
+  #endif
+  #ifdef USE_SSE
+    printf("USE_SSE defined\n");
+  #else
+    printf("USE_SSE NOT defined\n");
+  #endif
     int i, ret = 0;
     lbfgsfloatval_t fx;
     lbfgsfloatval_t *x = lbfgs_malloc(N);
